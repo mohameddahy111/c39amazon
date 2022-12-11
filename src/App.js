@@ -1,11 +1,13 @@
-import {Navbar , Layout} from './components'
+import { Navbar, Layout } from './components';
 import './App.css';
+import { DataContextProvider } from './context/DataContext';
+import { Outlet, RouterProvider } from 'react-router-dom';
+import Router from './Routes/Router';
 
 function App() {
   return (
     <>
-    <Navbar/>
-
+      <RouterProvider router={Router} />
     </>
   );
 }
