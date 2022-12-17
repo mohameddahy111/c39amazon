@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
-import {UseAllProducts, UseSearchProducts} from '../../hooks/UseApi';
+import {UseAllProducts} from '../../hooks/UseApi';
+import  { HomePage } from '../../components'
 
 export default function Home() {
-  return <>Home</>;
+  const {data}= UseAllProducts()
+  return (
+  <>
+  <HomePage/>
+  </>
+  );
 }

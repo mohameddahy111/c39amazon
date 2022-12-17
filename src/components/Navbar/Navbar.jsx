@@ -11,7 +11,7 @@ import UserLoction from './UserLoction';
 export default function Navbar() {
   return (
     <>
-      <div className=' w-full p-2 bg-[#231f20]  flex items-center justify-between'>
+      <div className=' w-full  bg-[#231f20]  flex items-center justify-between'>
         <Logo />
         <UserLoction />
         <SearchBox />

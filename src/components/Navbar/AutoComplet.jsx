@@ -9,7 +9,7 @@ export default function AutoComplet() {
     keyWord,
     setKeyWord,
   } = Stor();
-  const [searchList, setSe] = useState([]);
+  const [searchList, setSe] = useState('');
   const search = () => {
     const newList = data.filter(x =>
       x.title.toLowerCase().includes(keyWord.toLowerCase())
@@ -18,9 +18,10 @@ export default function AutoComplet() {
   };
   useEffect(() => {
     search();
-    setautoCompletListOpen(true);
+    if (searchList.length > 0) {
+      setautoCompletListOpen(true);
+    }
   }, [keyWord]);
-  console.log(data);
   const changeInputValue = text => {
     setKeyWord(text);
     setSe([]);
@@ -29,10 +30,10 @@ export default function AutoComplet() {
   return (
     <>
       {autoCompletListOpen && (
-        <div className=' w-[600] bg-white absolute top-20 px-4 p-2 shadow-xl rounded-md left-1/3'>
+        <div className=' w-[600] bg-white z-50 absolute top-20 px-4 p-2 shadow-xl rounded-md left-1/3'>
           <ul
             onMouseLeave={() => setautoCompletListOpen(false)}
-            className=' h-[300px] w-[300px] overflow-y-auto'
+            className=' h-[300px] w-[300px] overflow-y-auto z-50'
           >
             {searchList.length === 0 && <p>this product not found</p>}
             {searchList.map(x => (

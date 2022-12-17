@@ -1,14 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Stor } from '../../context/DataContext';
 
 export default function CartLogo() {
+  const { cartItems } = Stor();
   return (
-    <div className=' text-white relative  px-2 py-3  hover:border'>
-      <span className=' absolute left-1/3 text-yellow-500 font-semibold translate-y- '>
-        {' '}
-        1
-      </span>
-      <i className='fa-solid fa-cart-shopping fa-2x mt-1'></i>
-      <span className=' font-semibold'>Cart</span>
+    <Link to='/cart'>
+
+    <div className=' text-white relative  px-2 py-3  border border-transparent hover:border-white'>
+        <span className=' absolute left-1/3 text-yellow-500 font-semibold translate-y- '>
+          {' '}
+          {cartItems?.length}
+        </span>
+        <i className='fa-solid fa-cart-shopping fa-2x mt-1'></i>
+        <span className=' font-semibold'>Cart</span>
     </div>
+    </Link>
   );
 }
