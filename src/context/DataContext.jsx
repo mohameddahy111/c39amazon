@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { UseAllProducts } from '../hooks/UseApi';
 
@@ -17,6 +18,11 @@ export const DataContextProvider = ({ children }) => {
       setCartItems(JSON.parse(localStorage.amazonec39));
     } else {
       setCartItems([]);
+    }
+    if (localStorage.userInfo != null) {
+      setUserInfo(jwtDecode(localStorage.userInfo));
+    } else {
+      setUserInfo('');
     }
   }, []);
 

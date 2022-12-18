@@ -12,37 +12,47 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import { useSnackbar } from 'notistack';
+
 
 export default function Login() {
   const { userInfo, setUserInfo } = Stor();
   const navigate = useNavigate();
+  const {enqueueSnackbar} =useSnackbar()
+  
 
   const validationSchema = yup.object({
-    email: yup
-      .string('Enter your Email')
-      .email('Email is not match')
-      .required('Email is required'),
+    username: yup.string('').min('').required(''),
+    // email: yup
+    //   .string('Enter your Email')
+    //   .email('Email is not match')
+    //   .required('Email is required'),
     password: yup
       .string(' Enter your password')
       .min(6, 'min letter of password is 6')
       .required('Password is required'),
   });
   const formik = useFormik({
-    validationSchema: validationSchema,
-    onSubmit: valuse => {
-      loginFun(valuse);
-    },
     initialValues: {
-      email: '',
+      username: '',
       password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: values => {
+      loginFun(values);
     },
   });
   const loginFun = async values => {
-    const { data } = await axios.post(`https://reqres.in/api/login`, values);
-    if (data.message === 'success') {
-      localStorage.getItem('userInfo', data.token);
-      navigate('/home');
+    const { data } = await axios.post(
+      `https://dummyjson.com/auth/login`,
+      values
+    );
+    if (data.token) {
+      localStorage.setItem('userInfo', JSON.stringify(data.token));
+      setUserInfo(jwtDecode(localStorage.userInfo));
     } else {
+      enqueueSnackbar('email or password not true' , {variant :'error'})
     }
   };
   useEffect(() => {
@@ -61,13 +71,15 @@ export default function Login() {
             <List>
               <ListItem>
                 <TextField
-                  name='email'
-                  inputProps={{ type: 'email' }}
+                  name='username'
+                  inputProps={{ type: 'text' }}
                   label='E-mail'
                   fullWidth
-                  value={formik.values.email}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
+                  value={formik.values.username}
+                  error={
+                    formik.touched.username && Boolean(formik.errors.username)
+                  }
+                  helperText={formik.touched.username && formik.errors.username}
                   onChange={formik.handleChange}
                 />
               </ListItem>

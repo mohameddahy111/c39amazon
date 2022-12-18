@@ -92,7 +92,7 @@ export default function CartItems() {
                           <TableCell align='center'>{x.quantity}</TableCell>
                           <TableCell>
                             {(x.price -
-                              parseInt(x.discountPercentage * x.price) / 100) *
+                              parseInt((x.discountPercentage * x.price)/100))  *
                               x.quantity}{' '}
                             {''}$
                           </TableCell>

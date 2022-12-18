@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { json, Link, useNavigate } from 'react-router-dom';
 import { Stor } from '../../../context/DataContext';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
@@ -12,15 +12,21 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+import { useSnackbar } from 'notistack';
 
 export default function Register() {
   const { userInfo, setUserInfo } = Stor();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const validationSchema = yup.object({
-    username: yup
+    firstName: yup
       .string('Enter your Yser Name')
       .min(3, 'min letter of User name is 3')
+      .required('  User name is required'),
+    lastName: yup
+      .string('Enter your Yser last Name')
+      .min(3, 'min letter of User last name is 3')
       .required('  User name is required'),
     email: yup
       .string('Enter your Email')
@@ -30,52 +36,78 @@ export default function Register() {
       .string(' Enter your password')
       .min(6, 'min letter of password is 6')
       .required('Password is required'),
+    confiermPassword: yup
+      .string(' Enter your password')
+      .min(6, 'min letter of password is 6')
+      .required('Password is required'),
   });
   const formik = useFormik({
     initialValues: {
-        username: '',
-        email: '',
-        password: '',
-      },
-  
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confiermPassword: '',
+    },
+
     validationSchema: validationSchema,
-    onSubmit: valuse => {
-      loginFun(valuse);
+    onSubmit: values => {
+      if (values.confiermPassword === values.password) {
+        loginFun(values);
+      } else {
+        enqueueSnackbar(`password not match `, { variant:'error' });
+      }
     },
   });
   const loginFun = async values => {
-    const { data } = await axios.post(
-      'https://reqres.in/api/register'
-      ,
-      values
-    );
+    const { data } = await axios.post('https://dummyjson.com/users/add', values);
     console.log(data);
+    if (data.message === 'success') {
+      setUserInfo(data)
+    } else {
+      
+    }
+
   };
   useEffect(() => {
     if (userInfo) {
-      navigate('/');
+      navigate('/login');
     }
   }, [userInfo]);
   return (
     <>
       <Box className=' w-[60%] m-auto '>
         <Typography align='center' m={3} variant='h3' className=' capitalize  '>
-          log in
+          Register
         </Typography>
         <Box>
           <form onSubmit={formik.handleSubmit}>
             <List>
               <ListItem>
                 <TextField
-                  name='username'
+                  name='firstName'
                   inputProps={{ type: 'text' }}
                   label='User Name'
                   fullWidth
-                  value={formik.values.username}
+                  value={formik.values.firstName}
                   error={
-                    formik.touched.username && Boolean(formik.errors.username)
+                    formik.touched.firstName && Boolean(formik.errors.firstName)
                   }
-                  helperText={formik.touched.username && formik.errors.username}
+                  helperText={
+                    formik.touched.firstName && formik.errors.firstName
+                  }
+                  onChange={formik.handleChange}
+                />
+                <TextField
+                  name='lastName'
+                  inputProps={{ type: 'text' }}
+                  label='Last Name'
+                  fullWidth
+                  value={formik.values.lastName}
+                  error={
+                    formik.touched.lastName && Boolean(formik.errors.lastName)
+                  }
+                  helperText={formik.touched.lastName && formik.errors.lastName}
                   onChange={formik.handleChange}
                 />
               </ListItem>
@@ -102,6 +134,22 @@ export default function Register() {
                     formik.touched.password && Boolean(formik.errors.password)
                   }
                   helperText={formik.touched.password && formik.errors.password}
+                  onChange={formik.handleChange}
+                />
+                <TextField
+                  name='confiermPassword'
+                  inputProps={{ type: 'password' }}
+                  label='Confierm Password'
+                  fullWidth
+                  value={formik.values.confiermPassword}
+                  error={
+                    formik.touched.confiermPassword &&
+                    Boolean(formik.errors.confiermPassword)
+                  }
+                  helperText={
+                    formik.touched.confiermPassword &&
+                    formik.errors.confiermPassword
+                  }
                   onChange={formik.handleChange}
                 />
               </ListItem>
