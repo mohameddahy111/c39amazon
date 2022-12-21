@@ -1,10 +1,13 @@
+import bcrypt from 'bcryptjs'
+
 const data = {
   userData: [
     {
       name: 'mohamed',
       LastName: 'dahy',
       email: 'mohameddahy@gmail.com',
-      password: '11223344',
+      password: bcrypt.hashSync('11223344') ,
+      img :'',
       address: '',
       city: '',
       country: '',
@@ -16,8 +19,9 @@ const data = {
       name: 'ali',
       LastName: 'dahy',
       email: 'mohamedali@gmail.com',
-      password: '11223344',
+      password: bcrypt.hashSync('11223344') ,
       address: '',
+      img :'',
       city: '',
       country: '',
       isAdmin: false,

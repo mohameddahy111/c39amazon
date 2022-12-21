@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { json, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Stor } from '../../../context/DataContext';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
@@ -20,7 +20,7 @@ export default function Register() {
   const { enqueueSnackbar } = useSnackbar();
 
   const validationSchema = yup.object({
-    firstName: yup
+    name: yup
       .string('Enter your Yser Name')
       .min(3, 'min letter of User name is 3')
       .required('  User name is required'),
@@ -43,7 +43,7 @@ export default function Register() {
   });
   const formik = useFormik({
     initialValues: {
-      firstName: '',
+      name: '',
       lastName: '',
       email: '',
       password: '',
@@ -55,19 +55,18 @@ export default function Register() {
       if (values.confiermPassword === values.password) {
         loginFun(values);
       } else {
-        enqueueSnackbar(`password not match `, { variant:'error' });
+        enqueueSnackbar(`password not match `, { variant: 'error' });
       }
     },
   });
   const loginFun = async values => {
-    const { data } = await axios.post('https://dummyjson.com/users/add', values);
+    const { data } = await axios.post('/api/users/signup', values);
     console.log(data);
-    if (data.message === 'success') {
-      setUserInfo(data)
+    if (data.token) {
+      localStorage.setItem('userInfo', JSON.stringify(data.token));
+      navigate('/login');
     } else {
-      
     }
-
   };
   useEffect(() => {
     if (userInfo) {
@@ -85,17 +84,13 @@ export default function Register() {
             <List>
               <ListItem>
                 <TextField
-                  name='firstName'
+                  name='name'
                   inputProps={{ type: 'text' }}
                   label='User Name'
                   fullWidth
-                  value={formik.values.firstName}
-                  error={
-                    formik.touched.firstName && Boolean(formik.errors.firstName)
-                  }
-                  helperText={
-                    formik.touched.firstName && formik.errors.firstName
-                  }
+                  value={formik.values.name}
+                  error={formik.touched.name && Boolean(formik.errors.name)}
+                  helperText={formik.touched.name && formik.errors.name}
                   onChange={formik.handleChange}
                 />
                 <TextField

@@ -11,23 +11,20 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import jwtDecode from 'jwt-decode';
 import { useSnackbar } from 'notistack';
-
 
 export default function Login() {
   const { userInfo, setUserInfo } = Stor();
   const navigate = useNavigate();
-  const {enqueueSnackbar} =useSnackbar()
-  
+  const { enqueueSnackbar } = useSnackbar();
 
   const validationSchema = yup.object({
-    username: yup.string('').min('').required(''),
-    // email: yup
-    //   .string('Enter your Email')
-    //   .email('Email is not match')
-    //   .required('Email is required'),
+    email: yup
+      .string('Enter your Email')
+      .email('Email is not match')
+      .required('Email is required'),
     password: yup
       .string(' Enter your password')
       .min(6, 'min letter of password is 6')
@@ -35,7 +32,7 @@ export default function Login() {
   });
   const formik = useFormik({
     initialValues: {
-      username: '',
+      email: '',
       password: '',
     },
     validationSchema: validationSchema,
@@ -44,15 +41,12 @@ export default function Login() {
     },
   });
   const loginFun = async values => {
-    const { data } = await axios.post(
-      `https://dummyjson.com/auth/login`,
-      values
-    );
+    const { data } = await axios.post(`/api/users/signin`, values);
     if (data.token) {
       localStorage.setItem('userInfo', JSON.stringify(data.token));
       setUserInfo(jwtDecode(localStorage.userInfo));
     } else {
-      enqueueSnackbar('email or password not true' , {variant :'error'})
+      enqueueSnackbar(`Email or password not match`, { variant: 'error' });
     }
   };
   useEffect(() => {
@@ -71,15 +65,13 @@ export default function Login() {
             <List>
               <ListItem>
                 <TextField
-                  name='username'
+                  name='email'
                   inputProps={{ type: 'text' }}
                   label='E-mail'
                   fullWidth
-                  value={formik.values.username}
-                  error={
-                    formik.touched.username && Boolean(formik.errors.username)
-                  }
-                  helperText={formik.touched.username && formik.errors.username}
+                  value={formik.values.email}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                   onChange={formik.handleChange}
                 />
               </ListItem>
