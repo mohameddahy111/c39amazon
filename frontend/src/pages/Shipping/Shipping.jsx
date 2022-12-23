@@ -20,7 +20,7 @@ import { StepperStep } from '../../components';
 export default function Shipping() {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const { userInfo  ,userShipping ,setUserShipping } = Stor();
+  const { userInfo, userShipping, setUserShipping } = Stor();
   useEffect(() => {
     if (userInfo) {
     } else {
@@ -58,6 +58,7 @@ export default function Shipping() {
       .min(3, 'must by more than 3 ')
       .required('building is require'),
     floor: yup.string('Enter your floor').required('floor is require'),
+    phone: yup.number('Enter your floor').required('floor is require'),
   });
   const formik = useFormik({
     initialValues: {
@@ -85,7 +86,8 @@ export default function Shipping() {
         ? userInfo.building
         : '',
       floor: userShipping ? userShipping.floor : userInfo ? userInfo.floor : '',
-      DliveryNotes:userShipping?userShipping.DliveryNotes: '',
+      phone: userShipping ? userShipping.phone : userInfo ? userInfo.phone : '',
+      DliveryNotes: userShipping ? userShipping.DliveryNotes : '',
     },
     validationSchema: validationSchema,
     onSubmit: values => {
@@ -104,6 +106,7 @@ export default function Shipping() {
       building: values.building,
       floor: values.floor,
       DliveryNotes: values.DliveryNotes,
+      phone: values.phone,
     };
     localStorage.setItem('userShippingInof', JSON.stringify(newUser));
     setUserShipping(newUser);
@@ -119,7 +122,7 @@ export default function Shipping() {
           ></path>
         </svg>
         <StepperStep activ={1} />
-        <Typography component={'h2'} variant='h2' align='center' mb={4} >
+        <Typography component={'h2'} variant='h2' align='center' mb={4}>
           Shipping
         </Typography>
       </Box>
@@ -214,6 +217,16 @@ export default function Shipping() {
                 value={formik.values.floor ? formik.values.floor : ''}
                 error={formik.touched.floor && Boolean(formik.errors.floor)}
                 helperText={formik.touched.floor && formik.errors.floor}
+                onChange={formik.handleChange}
+                fullWidth
+              />
+              <TextField
+                name='phone'
+                label='phone'
+                inputProps={{ type: 'text' }}
+                value={formik.values.phone ? formik.values.phone : ''}
+                error={formik.touched.phone && Boolean(formik.errors.phone)}
+                helperText={formik.touched.phone && formik.errors.phone}
                 onChange={formik.handleChange}
                 fullWidth
               />

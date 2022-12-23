@@ -7,6 +7,7 @@ import {
   Detiles,
   Home,
   Login,
+  Payment,
   PlaseOrder,
   Register,
   Shipping,
@@ -40,6 +41,10 @@ const Router = createBrowserRouter([
       {
         path: '/PlaseOrder',
         element: <PlaseOrder />,
+      },
+      {
+        path: '/Payment',
+        element: <Payment />,
       },
       {
         path: '/detiles/:id',

@@ -1,4 +1,3 @@
-import { Add, Delete } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -17,15 +16,23 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { StepperStep } from '../../components';
+import { PaymentRadio, StepperStep } from '../../components';
 import { Stor } from '../../context/DataContext';
 
 export default function PlaseOrder() {
   const navigate = useNavigate();
+  const { cartItems, userShipping, userInfo } = Stor();
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/');
+    }
+    if (!userShipping && !cartItems) {
+      navigate('/shipping');
+    }
+  }, []);
 
-  const { cartItems, userShipping } = Stor();
   const taxt =
     (cartItems.reduce((a, c) => a + c.quantity * c.price, 0) * 14) / 100;
   const shippingCost =
@@ -271,18 +278,23 @@ export default function PlaseOrder() {
                           parseInt(
                             c.quantity * c.price -
                               (c.quantity * c.price * c.discountPercentage) /
-                                100
-                          ) + shippingCost + taxt,
+                                100 +
+                              shippingCost +
+                              taxt
+                          ),
                         0
                       )}{' '}
                       $
                     </Grid>
                   </ListItem>
                   <ListItem>
+                    <PaymentRadio />
+                  </ListItem>
+                  <ListItem>
                     <Button
                       fullWidth
                       variant='contained'
-                      onClick={() => navigate('/shipping')}
+                      onClick={() => navigate('/payment')}
                     >
                       payment
                     </Button>

@@ -10,6 +10,7 @@ export const DataContextProvider = ({ children }) => {
   const [drawerPage, setDrawerPage] = useState(false);
   const [quantityvalue, setQuantityvalue] = useState(1);
   const [cartItems, setCartItems] = useState([]);
+  const [paymentWay, setPaymentWay] = useState('visa');
   const [userInfo, setUserInfo] = useState(
     localStorage.userInfo ? jwtDecode(JSON.parse(localStorage.userInfo)) : ''
   );
@@ -45,7 +46,9 @@ export const DataContextProvider = ({ children }) => {
         setCartItems,
         userInfo,
         setUserInfo,
-        userShipping, setUserShipping
+        userShipping, setUserShipping,
+        paymentWay, setPaymentWay,
+
       }}
     >
       {children}

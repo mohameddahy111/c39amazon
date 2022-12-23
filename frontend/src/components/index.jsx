@@ -4,3 +4,4 @@ export {default as HomePage} from './Home/HomePage';
 export {default as Reviwes} from './Reviwes/Reviwes';
 export {default as Prodecter} from './Layout/Prodecter/Prodecter';
 export {default as StepperStep} from './stepper/StepperStep';
+export {default as PaymentRadio} from './PaymentRadio/PaymentRadio';
