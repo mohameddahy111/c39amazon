@@ -9,7 +9,7 @@ export const DataContextProvider = ({ children }) => {
   const [autoCompletListOpen, setautoCompletListOpen] = useState(false); // show & hide auto complet search box
   const [drawerPage, setDrawerPage] = useState(false);
   const [quantityvalue, setQuantityvalue] = useState(1);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(localStorage.amazonec39 ? JSON.parse(localStorage.amazonec39):[]);
   const [paymentWay, setPaymentWay] = useState('visa');
   const [userInfo, setUserInfo] = useState(
     localStorage.userInfo ? jwtDecode(JSON.parse(localStorage.userInfo)) : ''
@@ -21,13 +21,13 @@ export const DataContextProvider = ({ children }) => {
   );
 
   const { data } = UseAllProducts();
-  useEffect(() => {
-    if (localStorage.amazonec39 !== null) {
-      setCartItems(JSON.parse(localStorage.amazonec39));
-    } else {
-      setCartItems([]);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.amazonec39 !== null) {
+  //     setCartItems(JSON.parse(localStorage.amazonec39));
+  //   } else {
+  //     setCartItems([]);
+  //   }
+  // }, []);
   return (
     <DataContext.Provider
       value={{
