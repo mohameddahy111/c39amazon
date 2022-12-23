@@ -38,11 +38,7 @@ export default function Detiles() {
     }
   }, [params.id]);
   const newcategory = categorie.filter(x => x.id !== data.id);
-  const quantityNum = op => {
-    op === 'negatve'
-      ? setQuantityvalue(quantityvalue - 1)
-      : setQuantityvalue(quantityvalue + 1);
-  };
+  const quantityNum = op => {op === 'negatve'? setQuantityvalue(quantityvalue - 1): setQuantityvalue(quantityvalue + 1);};
   const addToCard = item => {
     const newItem = { ...item };
     const existItem = cartItems.find(x => x.id === newItem.id);

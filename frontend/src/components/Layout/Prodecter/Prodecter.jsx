@@ -9,7 +9,7 @@ export default function Prodecter({ children }) {
   const { userInfo } = Stor();
   const navigate = useNavigate();
   useEffect(() => {
-    closeSnackbar()
+    closeSnackbar();
     if (!userInfo) {
       enqueueSnackbar('you must login in first ', { variant: 'error' });
       navigate('/login');

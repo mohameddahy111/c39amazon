@@ -14,6 +14,7 @@ import {
 import axios, { Axios } from 'axios';
 import jwtDecode from 'jwt-decode';
 import { useSnackbar } from 'notistack';
+import { jsx } from '@emotion/react';
 
 export default function Login() {
   const { userInfo, setUserInfo } = Stor();
@@ -44,7 +45,7 @@ export default function Login() {
     const { data } = await axios.post(`/api/users/signin`, values);
     if (data.token) {
       localStorage.setItem('userInfo', JSON.stringify(data.token));
-      setUserInfo(jwtDecode(localStorage.userInfo));
+      setUserInfo(jwtDecode(JSON.parse(localStorage.userInfo)));
     } else {
       enqueueSnackbar(`Email or password not match`, { variant: 'error' });
     }

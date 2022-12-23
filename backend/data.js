@@ -1,34 +1,39 @@
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
 
 const data = {
-  userData: [
+  userData:[
     {
       name: 'mohamed',
-      LastName: 'dahy',
+      lastName: 'dahy',
       email: 'mohameddahy@gmail.com',
-      password: bcrypt.hashSync('11223344') ,
-      img :'',
-      address: '',
-      city: '',
-      country: '',
+      password: bcrypt.hashSync('11223344'),
+      img: '',
+      address: {
+        country: 'egypt',
+        city: '',
+        street: '',
+        building: '',
+        floor: '',
+      },
       isAdmin: true,
-      age:'',
-      
+      age: '',
     },
     {
       name: 'ali',
-      LastName: 'dahy',
+      lastName: 'dahy',
       email: 'mohamedali@gmail.com',
-      password: bcrypt.hashSync('11223344') ,
-      address: '',
-      img :'',
-      city: '',
-      country: '',
+      password: bcrypt.hashSync('11223344'),
+      address: {
+        country: 'egypt',
+        city: '',
+        street: '',
+        building: '',
+        floor: '',
+      },
       isAdmin: false,
-      age:'',
-
+      age: '',
     },
   ],
 };
 
-export default data
+export default data;

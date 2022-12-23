@@ -3,3 +3,4 @@ export {default as Layout} from './Layout/Layout';
 export {default as HomePage} from './Home/HomePage';
 export {default as Reviwes} from './Reviwes/Reviwes';
 export {default as Prodecter} from './Layout/Prodecter/Prodecter';
+export {default as StepperStep} from './stepper/StepperStep';

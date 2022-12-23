@@ -1,4 +1,3 @@
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { UseAllProducts } from '../hooks/UseApi';
@@ -11,21 +10,23 @@ export const DataContextProvider = ({ children }) => {
   const [drawerPage, setDrawerPage] = useState(false);
   const [quantityvalue, setQuantityvalue] = useState(1);
   const [cartItems, setCartItems] = useState([]);
-  const [userInfo, setUserInfo] = useState('');
+  const [userInfo, setUserInfo] = useState(
+    localStorage.userInfo ? jwtDecode(JSON.parse(localStorage.userInfo)) : ''
+  );
+  const [userShipping, setUserShipping] = useState(
+    localStorage.userShippingInof
+      ? JSON.parse(localStorage.userShippingInof)
+      : ''
+  );
+
   const { data } = UseAllProducts();
   useEffect(() => {
-    if (localStorage.amazonec39 != null) {
+    if (localStorage.amazonec39 !== null) {
       setCartItems(JSON.parse(localStorage.amazonec39));
     } else {
       setCartItems([]);
     }
-    if (localStorage.userInfo != null) {
-      setUserInfo(jwtDecode(localStorage.userInfo));
-    } else {
-      setUserInfo('');
-    }
   }, []);
-
   return (
     <DataContext.Provider
       value={{
@@ -44,6 +45,7 @@ export const DataContextProvider = ({ children }) => {
         setCartItems,
         userInfo,
         setUserInfo,
+        userShipping, setUserShipping
       }}
     >
       {children}

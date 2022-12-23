@@ -7,6 +7,7 @@ import {
   Detiles,
   Home,
   Login,
+  PlaseOrder,
   Register,
   Shipping,
 } from '../pages';
@@ -34,11 +35,11 @@ const Router = createBrowserRouter([
       },
       {
         path: '/shipping',
-        element: (
-          <Prodecter>
-            <Shipping />,
-          </Prodecter>
-        ),
+        element: <Shipping />,
+      },
+      {
+        path: '/PlaseOrder',
+        element: <PlaseOrder />,
       },
       {
         path: '/detiles/:id',
