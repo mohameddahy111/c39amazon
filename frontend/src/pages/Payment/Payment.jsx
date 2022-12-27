@@ -23,10 +23,10 @@ export default function Payment() {
     if (!userInfo) {
       navigate('/');
     }
-  }, []);
+  }, [userInfo]);
   return (
     <>
-      <Box className=' bg-[#010101] text-white'>
+      <Box className=' bg-[#010101] text-white mb-2'>
         <Box >
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 240' >
             <path

@@ -12,18 +12,18 @@ import './styles.scss';
 
 export default function SwiperShow() {
   return (
-    <div>
+    <div className='w-full'>
       <Swiper
         navigation={true}
         modules={[Navigation, Autoplay]}
         autoplay={{ delay: 6000, disableOnInteraction: false }}
         centeredSlides={true}
         loop={true}
-        className='mySwiper relative h-96 '
+        className='mySwiper relative h-96 w-full '
       >
         {data.carousel.map((x,index) => (
-          <SwiperSlide key={index} className='' >
-            <img src={x.img} alt='' className=' w-full h-72 ' />
+          <SwiperSlide key={index} className='w-full' >
+            <img src={x.img} alt='' className=' w-full h-96 ' />
           </SwiperSlide>
         ))}
       </Swiper>

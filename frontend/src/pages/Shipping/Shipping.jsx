@@ -22,12 +22,11 @@ export default function Shipping() {
   const navigate = useNavigate();
   const { userInfo, userShipping, setUserShipping } = Stor();
   useEffect(() => {
-    if (userInfo) {
-    } else {
+    if (!userInfo) {
       enqueueSnackbar('you must login in first ', { variant: 'error' });
       navigate('/login');
     }
-  }, []);
+  }, [userInfo]);
   const validationSchema = yup.object({
     name: yup
       .string('Enter your name')
@@ -129,7 +128,7 @@ export default function Shipping() {
       <Box className={`${styles.form} m-auto w-[60%]`}>
         <form action='' onSubmit={formik.handleSubmit}>
           <List>
-            <ListItem className=' flex justify-center items-center gap-1'>
+            <ListItem className=' flex flex-col gap-3 lg:flex lg:flex-row justify-center items-center lg:gap-1'>
               <TextField
                 name='name'
                 label='Name'
@@ -165,7 +164,7 @@ export default function Shipping() {
                 onChange={formik.handleChange}
               />
             </ListItem>
-            <ListItem className='flex justify-between items-center gap-1'>
+            <ListItem className=' flex flex-col gap-3 lg:flex lg:flex-row justify-center items-center lg:gap-1'>
               <TextField
                 name='country'
                 label='Country'
@@ -197,7 +196,7 @@ export default function Shipping() {
                 fullWidth
               />
             </ListItem>
-            <ListItem className='flex justify-between items-center gap-1'>
+            <ListItem className=' flex flex-col gap-3 lg:flex lg:flex-row justify-center items-center lg:gap-1'>
               <TextField
                 name='building'
                 label='Building'

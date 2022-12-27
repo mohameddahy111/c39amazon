@@ -1,0 +1,74 @@
+.nameBox{
+    // background-color: #85FFBD;
+    // background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+    // background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);    
+}
+h2{
+    background: -webkit-linear-gradient(left, #f0c000 40%, #208080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.herobacground{
+    background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%);
+    padding-top: 20px;
+}
+.addbtn{
+    text-transform:uppercase;
+    --glow-color: rgb(217, 176, 255);
+    --glow-spread-color: rgba(191, 123, 255, 0.781);
+    --enhanced-glow-color: rgb(231, 206, 255);
+    --btn-color: rgb(100, 61, 136);
+    border: .25em solid var(--glow-color);
+    padding: 1em 3em;
+    color: var(--glow-color);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--btn-color);
+    border-radius: 1em;
+    outline: none;
+    -webkit-box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 1em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+            box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 1em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+    text-shadow: 0 0 .5em var(--glow-color);
+    position: relative;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+   }
+   
+   .addbtn::after {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 120%;
+    left: 0;
+    height: 100%;
+    background-color: var(--glow-spread-color);
+    -webkit-filter: blur(2em);
+            filter: blur(2em);
+    opacity: .7;
+    -webkit-transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+            transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+   }
+   
+   .addbtn:hover {
+    color: var(--btn-color);
+    background-color: var(--glow-color);
+    -webkit-box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 2em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+            box-shadow: 0 0 1em .25em var(--glow-color),
+           0 0 4em 2em var(--glow-spread-color),
+           inset 0 0 .75em .25em var(--glow-color);
+   }
+   
+   .addbtn:active {
+    -webkit-box-shadow: 0 0 0.6em .25em var(--glow-color),
+           0 0 2.5em 2em var(--glow-spread-color),
+           inset 0 0 .5em .25em var(--glow-color);
+            box-shadow: 0 0 0.6em .25em var(--glow-color),
+           0 0 2.5em 2em var(--glow-spread-color),
+           inset 0 0 .5em .25em var(--glow-color);
+}

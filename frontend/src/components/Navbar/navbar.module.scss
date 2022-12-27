@@ -1,0 +1,11 @@
+.navbar{
+    @media screen and (min-width: 300px) and (max-width: 900px) {
+        flex-direction: column;
+
+    }
+}
+.loction {
+  @media screen and (min-width: 300px) and (max-width: 900px) {
+    display: none;
+  }
+}

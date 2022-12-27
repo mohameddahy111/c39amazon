@@ -2,19 +2,19 @@ import React from 'react';
 import { Stor } from '../../context/DataContext';
 import AutoComplet from './AutoComplet';
 import { UseCategories } from '../../hooks/UseApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function SearchBox() {
+  const navigate= useNavigate()
   const { categories } = UseCategories();
   const { keyWord, setKeyWord } = Stor();
 
   return (
-    <div className=' ml-2 h-10  flex items-center w-[600px] '>
+    <div className=' ml-2 h-10  flex items-center md:w-[600px]  '>
       <select
         name='categroy'
         id=''
-        // onChange={e => {
-        //   setCategory(e.target.value);
-        // }}
+        onChange={e => {navigate(`/category/${e.target.value}`)}}
         className='w-20 pl-2 h-full rounded-l-md focus:outline-[#f3a847] focus:bg-gray-300  bg-gray-100 hover:bg-gray-300 border-r-2 '
       >
         <option className=' bg-white' value=''>

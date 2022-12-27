@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Stor } from '../../context/DataContext';
 
 export default function AutoComplet() {
+  const navigate = useNavigate();
   const {
     data,
     autoCompletListOpen,
@@ -24,6 +26,7 @@ export default function AutoComplet() {
   }, [keyWord]);
   const changeInputValue = text => {
     setKeyWord(text);
+    navigate(`/searchpage/${text}`);
     setSe([]);
     setautoCompletListOpen(false);
   };

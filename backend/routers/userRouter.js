@@ -16,12 +16,12 @@ userRouter.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
-          lastName:user.lastName,
+          lastName: user.lastName,
           token: generateToken(user),
         });
       }
-      res.status(401).send({ message: "Invalid email or password'" });
     }
+    res.status(401).send({ message: "Invalid email or password" });
   })
 );
 userRouter.post(
@@ -38,7 +38,7 @@ userRouter.post(
       _id: user._id,
       name: user.name,
       email: user.email,
-      lastName:user.lastName,
+      lastName: user.lastName,
       isAdmin: user.isAdmin,
       token: generateToken(user),
     });

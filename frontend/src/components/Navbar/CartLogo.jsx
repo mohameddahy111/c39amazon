@@ -7,7 +7,7 @@ export default function CartLogo() {
   return (
     <Link to='/cart'>
 
-    <div className=' text-white relative  px-2 py-3  border border-transparent hover:border-white'>
+    <div className=' text-white relative  px-2 py-3 mr-2  hover:shadow-sm hover:shadow-[#208080] '>
         <span className=' absolute left-1/3 text-yellow-500 font-semibold translate-y- '>
           {' '}
           {cartItems?.length}

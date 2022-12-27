@@ -11,13 +11,13 @@ import UserLoction from './UserLoction';
 export default function Navbar() {
   return (
     <>
-      <div className=' w-full  bg-[#231f20]  flex items-center justify-between'>
+      <div className={`w-full flex items-center justify-between bg-[#132436] ${style.navbar}`} >
         <Logo />
         <UserLoction />
         <SearchBox />
-        <FlagCun />
+        {/* <FlagCun /> */}
         <UserInfo/>
-        <RerutrnOrders/>
+        {/* <RerutrnOrders/> */}
         <CartLogo/>
       </div>
     </>

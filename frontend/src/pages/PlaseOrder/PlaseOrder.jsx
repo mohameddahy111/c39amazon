@@ -31,7 +31,7 @@ export default function PlaseOrder() {
     if (!userShipping && !cartItems) {
       navigate('/shipping');
     }
-  }, []);
+  }, [userInfo]);
 
   const taxt =
     (cartItems.reduce((a, c) => a + c.quantity * c.price, 0) * 14) / 100;
@@ -40,7 +40,7 @@ export default function PlaseOrder() {
 
   return (
     <>
-      <Box>
+      <Box mb={2}>
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 240'>
           <path
             fill='#ffd700'
@@ -54,63 +54,63 @@ export default function PlaseOrder() {
         </Typography>
         <Box>
           <Grid container spacing={1}>
-            <Grid md={9} component={Paper}>
+            <Grid item md={9} xs={12} component={Paper}>
               <List>
                 <ListItem>
-                  <p className=' font-semibold text-2xl '>
+                  <p className=' font-semibold text-2xl capitalize '>
                     Shipping informtion :{' '}
                   </p>
                 </ListItem>
-                <ListItem>
-                  <Grid md={12}>
+                <ListItem className=' '>
+                  <Grid item md={12} xs={12}>
                     <Card>
                       <List>
-                        <ListItem>
-                          <Grid md={4}>
-                            <Typography>
-                              Full Name : {userShipping.name}{' '}
+                        <ListItem className=' flex flex-col text-start items-start gap-2 md:flex-row md:gap-0 '>
+                          <Grid item md={4} xs={12} className='w-full' >
+                            <Typography className=' capitalize'>
+                             <span className=' font-semibold'> Full Name </span>: {userShipping.name}{' '}
                               {userShipping.lastName}
                             </Typography>
                           </Grid>
-                          <Grid md={4}>
+                          <Grid item md={4} xs={12} className='w-full' >
                             <Typography>
-                              E-mail : {userShipping.email}
+                             <span className=' font-semibold'>E-mail</span>  : {userShipping.email}
                             </Typography>
                           </Grid>
-                          <Grid md={4}>
+                          <Grid item md={4} xs={12} className='w-full'>
                             <Typography>
-                              Phone : {userShipping.phone}
-                            </Typography>
-                          </Grid>
-                        </ListItem>
-                        <ListItem>
-                          <Typography>Address :</Typography>
-                        </ListItem>
-                        <ListItem>
-                          <Grid md={4}>
-                            <Typography>
-                              Country : {userShipping.country}
-                            </Typography>
-                          </Grid>
-                          <Grid md={4}>
-                            <Typography>City : {userShipping.city}</Typography>
-                          </Grid>
-                          <Grid md={4}>
-                            <Typography>
-                              Street : {userShipping.street}
+                            <span className=' font-semibold'> Phone</span> : {userShipping.phone}
                             </Typography>
                           </Grid>
                         </ListItem>
                         <ListItem>
-                          <Grid md={6}>
+                          <Typography sx={{fontWeight :700 , }} >Address :</Typography>
+                        </ListItem>
+                        <ListItem>
+                          <Grid item md={4} xs={12}>
                             <Typography>
-                              Building : {userShipping.building}
+                            <span className=' font-semibold'>Country</span> : {userShipping.country}
+                            </Typography>
+                          </Grid>
+                          <Grid item md={4} xs={12}>
+                            <Typography> <span className=' font-semibold'>City</span>  : {userShipping.city}</Typography>
+                          </Grid>
+                          <Grid item md={4} xs={12}>
+                            <Typography>
+                            <span className=' font-semibold'>Street</span> : {userShipping.street}
+                            </Typography>
+                          </Grid>
+                        </ListItem>
+                        <ListItem>
+                          <Grid item md={6} xs={12}>
+                            <Typography>
+                            <span className=' font-semibold'>Building</span> : {userShipping.building}
                             </Typography>{' '}
                           </Grid>
-                          <Grid md={6}>
+                          <Grid item md={6} xs={12}>
                             {' '}
                             <Typography>
-                              Floor :{userShipping.floor}
+                            <span className=' font-semibold'>Floor</span> :{userShipping.floor}
                             </Typography>{' '}
                           </Grid>
                         </ListItem>
@@ -122,7 +122,7 @@ export default function PlaseOrder() {
                   <p className=' font-semibold text-2xl '>Cart Items : </p>
                 </ListItem>
                 <ListItem>
-                  <Grid md={12} xs={12}>
+                  <Grid item md={12} xs={12}>
                     <TableContainer component={Paper}>
                       <Table>
                         <TableHead>
@@ -171,7 +171,7 @@ export default function PlaseOrder() {
                 </ListItem>
               </List>
             </Grid>
-            <Grid md={3}>
+            <Grid item md={3} xs={12}>
               <Card>
                 <Typography
                   component={'h5'}
@@ -231,14 +231,14 @@ export default function PlaseOrder() {
                     </Grid>
                   </ListItem>
                   <ListItem>
-                    <Grid md={6}>
+                    <Grid item md={6}>
                       <Typography>
                         <span className=' capitalize font-semibold'>
                           taxt :
                         </span>
                       </Typography>
                     </Grid>
-                    <Grid md={6}>
+                    <Grid item md={6}>
                       <Typography>
                         <span className=' capitalize font-semibold'>
                           {taxt}
@@ -247,14 +247,14 @@ export default function PlaseOrder() {
                     </Grid>
                   </ListItem>
                   <ListItem>
-                    <Grid md={6}>
+                    <Grid item md={6}>
                       <Typography>
                         <span className=' capitalize font-semibold'>
                           shipping :
                         </span>
                       </Typography>
                     </Grid>
-                    <Grid md={6}>
+                    <Grid item md={6}>
                       <Typography>
                         <span className=' capitalize font-semibold'>
                           {shippingCost}

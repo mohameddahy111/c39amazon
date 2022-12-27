@@ -42,12 +42,14 @@ export default function Login() {
     },
   });
   const loginFun = async values => {
-    const { data } = await axios.post(`/api/users/signin`, values);
+    const { data } = await axios
+      .post(`/api/users/signin`, values)
+      .catch(err => {
+        enqueueSnackbar(`${err.response.data.message}`, { variant: 'error' });
+      });
     if (data.token) {
       localStorage.setItem('userInfo', JSON.stringify(data.token));
       setUserInfo(jwtDecode(JSON.parse(localStorage.userInfo)));
-    } else {
-      enqueueSnackbar(`Email or password not match`, { variant: 'error' });
     }
   };
   useEffect(() => {

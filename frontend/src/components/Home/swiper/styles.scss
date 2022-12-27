@@ -1,13 +1,7 @@
-.bg-li  {
-  // background-image: linear-gradient(to bottom, rgb(167, 222, 223) ,rgba(206, 238, 143, 0.845) );
-
-}
-
 // .swiper-slide {
 //   text-align: center;
 //   font-size: 18px;
-//   background: #fff;
-
+  // background: #fff;
 //   /* Center slide text vertically */
 //   display: -webkit-box;
 //   display: -ms-flexbox;
@@ -41,6 +35,10 @@
   border: 1px #fff solid !important;
   background-color: transparent;
   box-shadow: 1px 1px 10px gray ;
+  @media screen and (min-width :300px) and (max-width :800px) {
+    display: none;
+    
+  }
 }
 .swiper-button-next:after, .swiper-button-prev:after{
   color: #fff;

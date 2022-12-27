@@ -9,9 +9,11 @@ import {
   Login,
   Payment,
   PlaseOrder,
+  Profile,
   Register,
   Shipping,
 } from '../pages';
+import SearchPage from '../pages/SearchPage/SearchPage';
 
 const Router = createBrowserRouter([
   {
@@ -35,6 +37,10 @@ const Router = createBrowserRouter([
         element: <Register />,
       },
       {
+        path: '/searchpage/:itemName',
+        element: <SearchPage />,
+      },
+      {
         path: '/shipping',
         element: <Shipping />,
       },
@@ -49,6 +55,10 @@ const Router = createBrowserRouter([
       {
         path: '/detiles/:id',
         element: <Detiles />,
+      },
+      {
+        path: '/profile/:id',
+        element: <Profile />,
       },
       {
         path: '/category',
