@@ -17,6 +17,7 @@ const data = {
       },
       isAdmin: true,
       age: '',
+      phone :""
     },
     {
       name: 'ali',
@@ -32,6 +33,8 @@ const data = {
       },
       isAdmin: false,
       age: '',
+      phone :""
+
     },
   ],
 };

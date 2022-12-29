@@ -12,12 +12,12 @@ import {
 import { Stor } from '../../context/DataContext';
 import style from './profile.module.scss';
 import { profileImg } from '../../image';
-import { Add, AddCard, Favorite,  Grading } from '@mui/icons-material';
+import { Add, AddCard, Favorite, Grading } from '@mui/icons-material';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
 
 export default function Profile() {
-  const { userInfo } = Stor();
+  const { userInfo, setUserInfo } = Stor();
   const [changeImage, setChangeImage] = useState('');
   const validationSchema = yup.object({
     name: yup
@@ -58,14 +58,33 @@ export default function Profile() {
       lastName: userInfo ? userInfo.lastName : '',
       email: userInfo ? userInfo.email : '',
       country: userInfo ? userInfo.country : '',
-      city: userInfo ? userInfo.city : '',
+      city: userInfo ? userInfo.city :  '',
       street: userInfo ? userInfo.street : '',
       building: userInfo ? userInfo.building : '',
       floor: userInfo ? userInfo.floor : '',
       phone: userInfo ? userInfo.phone : '',
     },
-    onSubmit: values => {},
+    onSubmit: values => {
+      updrtUser(values);
+    },
   });
+
+  const updrtUser = values => {
+    const newData = {
+      name: values.name,
+      lastName: values.lastName,
+      email: values.email,
+      country: values.country,
+      city: values.city,
+      street: values.street,
+      building: values.building,
+      floor: values.floor,
+      phone: values.phone,
+      image: changeImage ? URL.createObjectURL(changeImage) : '',
+    };
+    setUserInfo(newData);
+    localStorage.setItem('userUpdate', JSON.stringify(newData));
+  };
   return (
     <Box className={style.herobacground}>
       <Box
@@ -97,7 +116,11 @@ export default function Profile() {
         <Grid item md={3} xs={12}>
           <Box className=' relative'>
             <img
-              src={changeImage ? URL.createObjectURL(changeImage) : profileImg}
+              src={
+                changeImage
+                  ? URL.createObjectURL(changeImage)
+                  : profileImg
+              }
               alt=''
               width={'100%'}
               className='rounded-md shadow-md'
@@ -127,7 +150,7 @@ export default function Profile() {
                   label='Name'
                   inputProps={{ type: 'text' }}
                   fullWidth
-                  value={formik.values.name}
+                  value={formik.values.name ? formik.values.name : ''}
                   error={formik.touched.name && Boolean(formik.errors.name)}
                   helperText={formik.touched.name && formik.errors.name}
                   onChange={formik.handleChange}
@@ -137,7 +160,7 @@ export default function Profile() {
                   label='Last Name'
                   inputProps={{ type: 'text' }}
                   fullWidth
-                  value={formik.values.lastName}
+                  value={formik.values.lastName ? formik.values.lastName : ''}
                   error={
                     formik.touched.lastName && Boolean(formik.errors.lastName)
                   }
@@ -151,7 +174,7 @@ export default function Profile() {
                   label='E-mail'
                   inputProps={{ type: 'email' }}
                   fullWidth
-                  value={formik.values.email}
+                  value={formik.values.email ? formik.values.email : ''}
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
                   onChange={formik.handleChange}
@@ -226,10 +249,7 @@ export default function Profile() {
                 />
               </ListItem>
               <ListItem mb={3} p={3}>
-                <button
-                className={style.addbtn}
-                  type='submit'
-                >
+                <button className={style.addbtn} type='submit'>
                   update
                 </button>
               </ListItem>
@@ -238,32 +258,32 @@ export default function Profile() {
         </Grid>
         <Grid item md={2} xs={12} mt={3}>
           {/* <Paper elevation={4}> */}
-            <List>
-              <ListItem>
-                <Link to='' >
-                  <Box className=' flex justify-center items-center gap-2 text-[#208080] capitalize hover:underline '>
-                    <Favorite sx={{ color: 'tomato' }} />
-                    <Typography>my Favorite list</Typography>
-                  </Box>
-                </Link>
-              </ListItem>
-              <ListItem>
-                <Link to='' >
-                  <Box className=' flex justify-center items-center gap-2 text-[#208080] capitalize hover:underline'>
-                    <Grading  />
-                    <Typography>my orders list</Typography>
-                  </Box>
-                </Link>
-              </ListItem>
-              <ListItem>
-                <Link to='' >
-                  <Box className=' flex justify-center items-center gap-1 text-[#208080] capitalize hover:underline'>
-                    <AddCard  />
-                    <Typography> add payment card</Typography>
-                  </Box>
-                </Link>
-              </ListItem>
-            </List>
+          <List>
+            <ListItem>
+              <Link to=''>
+                <Box className=' flex justify-center items-center gap-2 text-[#208080] capitalize hover:underline '>
+                  <Favorite sx={{ color: 'tomato' }} />
+                  <Typography>my Favorite list</Typography>
+                </Box>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link to=''>
+                <Box className=' flex justify-center items-center gap-2 text-[#208080] capitalize hover:underline'>
+                  <Grading />
+                  <Typography>my orders list</Typography>
+                </Box>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link to=''>
+                <Box className=' flex justify-center items-center gap-1 text-[#208080] capitalize hover:underline'>
+                  <AddCard />
+                  <Typography> add payment card</Typography>
+                </Box>
+              </Link>
+            </ListItem>
+          </List>
           {/* </Paper> */}
         </Grid>
       </Grid>

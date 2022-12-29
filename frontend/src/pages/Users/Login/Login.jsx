@@ -11,10 +11,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { useSnackbar } from 'notistack';
-import { jsx } from '@emotion/react';
 
 export default function Login() {
   const { userInfo, setUserInfo } = Stor();

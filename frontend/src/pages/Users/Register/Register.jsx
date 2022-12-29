@@ -60,8 +60,11 @@ export default function Register() {
     },
   });
   const loginFun = async values => {
-    const { data } = await axios.post('/api/users/signup', values);
-    console.log(data);
+    const { data } = await axios
+      .post('/api/users/signup', values)
+      .catch(err => {
+        enqueueSnackbar(`${err.response.data.message}`, { variant: 'error' });
+      });
     if (data.token) {
       localStorage.setItem('userInfo', JSON.stringify(data.token));
       navigate('/login');
@@ -82,7 +85,7 @@ export default function Register() {
         <Box>
           <form onSubmit={formik.handleSubmit}>
             <List>
-              <ListItem>
+              <ListItem className=' flex gap-2'>
                 <TextField
                   name='name'
                   inputProps={{ type: 'text' }}
@@ -118,7 +121,7 @@ export default function Register() {
                   onChange={formik.handleChange}
                 />
               </ListItem>
-              <ListItem>
+              <ListItem className=' flex gap-2'>
                 <TextField
                   name='password'
                   inputProps={{ type: 'password' }}

@@ -5,6 +5,7 @@ import {
   Category,
   CategoryDetiles,
   Detiles,
+  FinlPage,
   Home,
   Login,
   Payment,
@@ -51,6 +52,10 @@ const Router = createBrowserRouter([
       {
         path: '/Payment',
         element: <Payment />,
+      },
+      {
+        path: '/finlPage',
+        element: <FinlPage />,
       },
       {
         path: '/detiles/:id',
