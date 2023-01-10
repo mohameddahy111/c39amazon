@@ -49,7 +49,7 @@ export default function CartItems() {
               className=' capitalize'
             >
               your cart is emty please go to{' '}
-              <Link to='/category' className=' text-blue-400 hover:underline'>
+              <Link  to='/category' className=' text-blue-400 hover:underline'>
                 shop{' '}
               </Link>{' '}
             </Typography>{' '}

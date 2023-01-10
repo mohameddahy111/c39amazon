@@ -6,8 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function FinlPage() {
 const navigate = useNavigate()
   return (
-    <div className=' h-96 flex justify-center items-center flex-col '>
-      <h2 className=' text-3xl w-[70%] text-center capitalize '>
+    <div className='  flex justify-center items-center flex-col py-16 '>
+      <h2 className=' text-3xl w-[70%] text-center capitalize py-16 '>
         Thank you very much for your trust{' '}
         <Link to='/' className=' text-blue-400 hover:underline'>
           {' '}
